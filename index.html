@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Roll by Emlyn</title>
+    <meta name="description" content="Dice probability calculator">
+    <link href="styles.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bevan:ital@1&family=Fira+Code&display=swap" rel="stylesheet"> </head>
+    
+<body>
+    
+    <div id="scroll-target-top"></div>
+    
+    <div id="info-modal" onclick="toggleInfoModal()">
+        <div onclick="event.stopPropagation()">            
+            <div>
+                <h4>Operations</h4>
+                <p>+&emsp;&emsp;&emsp;&emsp;&emsp;Add the results of two dice functions</p>
+                <p>-&emsp;&emsp;&emsp;&emsp;&emsp;Subtract the result of the second dice function from the first</p>
+                <br />
+                <h4>Roll functions</h4>
+                <p>ndX&emsp;&emsp;&nbsp;Roll n X-sided die and sum the results</p>
+                <p>ndX!&emsp;&emsp;Roll an X-sided die twice and take the greater value. This is repeated n times with the results summed</p>
+                <p>ndX?&emsp;&emsp;Roll an X-sided die twice and take the lesser value. This is repeated n times with the results summed</p>
+            
+            </div>
+        
+        </div>
+    </div>
+    
+    <img id="info-button" onclick="toggleInfoModal();" src="assets/info.svg" />
+    
+    <h1>ROLL</h1>
+    <h2>by emlyn.</h2>
+    
+    <form id="roll-form" onsubmit="promptOnSubmit(); return false" autocomplete="off">
+        <input type="text" placeholder="1d20 + ..." pattern="(?:[0-9]+(d[0-9]+)?\s*(?:!|\?)?\s*(\+|-|\*)?\s*)+">
+    </form>
+    
+    <div id="probabilities">
+        <div id="pdf-container">
+            <span>Probability Mass Function (P&nbsp;==&nbsp;S)</span>
+            <canvas></canvas>
+        
+        </div>
+        <div id="cdf-container">
+            <span>Cumulative Distribution Function (P&nbsp;&gt;=&nbsp;S)</span>
+            <canvas></canvas>
+            
+        </div>
+        <div id="table-container">
+            <span>Probablity Table</span>
+            <table>
+            </table>
+        </div>
+    </div>
+    
+        
+    <div id="no-js-modal">
+        <div>
+            <img src="assets/js-logo.svg" />
+            <div>
+                <p>Enable JavaScript<br></p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+    <script src="parser.js"></script>
+
+    
+</body>
+
+
+</html>
