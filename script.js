@@ -114,9 +114,9 @@ async function ndxDis(n, X) {
 }
 
 
-async function pmf2cdf(pmf) { /* note that this gives 1-cdf, as we are interested in the probability of meeting or exceeding a given role */
+async function pmf2cdf(pmf, keyOrder) { /* note that this gives 1-cdf, as we are interested in the probability of meeting or exceeding a given role */
     cdf = {};
-    Object.keys(pmf).forEach((cv) => {
+    keyOrder.forEach((cv) => {
         if (cdf[cv-1]) {
             cdf[cv] = cdf[cv-1] - pmf[cv];
         } else { /* first element - special case */
@@ -180,7 +180,7 @@ async function populateTable(table, probs, keyOrder) {
     pmfBtn.innerHTML = "PMF";
     pmfBtn.onclick = () => { populateTable(table, CURR_PROBS, keyOrder); }
     cdfBtn.innerHTML = "CDF";
-    cdfBtn.onclick = async () => { populateTable(table, await pmf2cdf(CURR_PROBS), keyOrder); }
+    cdfBtn.onclick = async () => { populateTable(table, await pmf2cdf(CURR_PROBS, keyOrder), keyOrder); }
 
     if (Number(probs[Object.keys(probs)[0]]) == 1) {
         // cdf mode
@@ -318,7 +318,7 @@ async function promptOnSubmit() {
     cdfCanv = document.getElementById("cdf-container").children[1];
     mTable = document.getElementById("table-container").children[1];
 
-    cdf = (await pmf2cdf(CURR_PROBS));
+    cdf = (await pmf2cdf(CURR_PROBS, keyOrder));
     drawOntoCanvas(pmfCanv, CURR_PROBS, keyOrder);
     drawOntoCanvas(cdfCanv, cdf, keyOrder);
     populateTable(mTable, CURR_PROBS, keyOrder);
